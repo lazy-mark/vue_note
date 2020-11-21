@@ -10,11 +10,12 @@
         <p>num: {{num}}</p>
         <p>str: {{str}}</p>
         <p>bool: {{bool}}</p>
-        <!-- null 和 undefined 本身是不显示的, -->
+        <!-- null 和 undefined 本身是不显示的,null和undefined用布尔值表示为false -->
         <p>nul: {{nul ? '1' : '2'}}</p>
         <p>undef: {{undef && 1 || 2}}</p>
         <p>obj: {{obj}}</p>
         <p>arr: {{arr[0]}}</p>
+        <!-- 如果不加括号,输出的是函数对象 -->
         <p>fun: {{fun()}}</p>
         
         <!-- 实际上也会输出 -->
