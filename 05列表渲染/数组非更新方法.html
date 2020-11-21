@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- 这些方法不会变更原始数组，而总是返回一个新数组. -->
+        <h2>{{users}}</h2>
+        <h2>{{userIds}}</h2>
+
+        <button @click='filterSex'>过滤男生</button>
+        <button @click='orderById(true)'>sort</button>
+
+        <button @click='slice'>slice</button>
+        <button @click='concat'>concat</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                userIds: [1,2,3],
+                users: [
+                    {
+                        id: 1,
+                        name: '张三',
+                        sex: '男',
+                    },
+                    {
+                        id: 2,
+                        name: '李四',
+                        sex: '女'
+                    },
+                    {
+                        id: 3,
+                        name: '张飞',
+                        sex: '男'
+                    }
+                ]
+            },
+            methods: {
+                filterSex() {
+                    this.users = this.users.filter(user => user.sex === '男')
+                },
+                orderById(desc) {
+                    if (desc) {
+                        this.users = this.users.sort((user1, user2) => user2.id - user1.id)
+                    }else {
+                        this.users = this.users.sort((user1, user2) => user1.id - user2.id)
+                    }
+                },
+                slice() {
+                    // 从头删除一个元素
+                    // this.users = this.users.slice(1)
+                    // 截取从第0个元素到第1个元素【不包括】
+                    this.users = this.users.slice(0,1)
+                },
+                concat() {
+                    const uIds = [4,5,6,7];
+                    this.userIds = this.userIds.concat(uIds)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
