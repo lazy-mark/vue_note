@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key维护状态</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 
+                key可高效的更新虚拟DOM,与大名鼎鼎的diff算法有关.
+                当 Vue 正在更新使用 v-for 渲染的元素列表时，它默认使用“就地更新”的策略。
+                如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序，而是就地更新每个元素，并且确保它们在每个索引位置正确渲染。
+                这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出。
+             -->
+            <li v-for="movie in movies" v-bind:key="movie.id">{{movie.name}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                movies: [
+                    {
+                        id: 1,
+                        name: '海绵宝宝'
+                    },
+                    {
+                        id: 2,
+                        name: '海王'
+                    },
+                    {
+                        id: 3,
+                        name: '葫芦娃'
+                    }
+                ]
+            },
+        })
+    </script>
+</body>
+</html>

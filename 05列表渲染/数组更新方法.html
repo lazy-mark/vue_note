@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组更新方法</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <h2>{{arr}}</h2>
+        <button @click="push">push</button>
+        <button @click="pop">pop</button>
+        <button @click="shift">shift</button>
+        <button @click="unshift">unshift</button>
+        <button @click="splice">splice</button>
+        <button @click="reverse">reverse</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                arr: [1,2,3,4,5,6,7,8]
+            },
+            methods: {
+                push() {
+                    this.arr.push(1000)
+                },
+                pop() {
+                    this.arr.pop()
+                },
+                shift() {
+                    this.arr.shift()
+                },
+                unshift() {
+                    this.arr.unshift('1000')
+                },
+                splice() {
+                    // 删除从第三个位置后【包括第三个】的所有元素,返回被删除的元素
+                    // this.arr.splice(3)
+                    // 删除第一个位置的后两个元素,返回被删除的数组
+                    // this.arr.splice(1,2)
+                    // 将第一个位置替换成99,返回被更新的元素
+                    // this.arr.splice(1,1,99)
+                    // 将第一个位置的元素删除,同时在第一个位置添加99和100
+                    this.arr.splice(1,1,99,100)
+                },
+                reverse() {
+                    this.arr.reverse()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
