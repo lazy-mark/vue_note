@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on指令</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- 传参 -->
+    <div id="app">
+        <h2>{{count}}</h2>
+        <button v-on:click="count++">+</button>
+        <hr>
+        <!-- 情况一:方法没有参数 -->
+        <button v-on:click="addBtn">+</button>
+        <button v-on:click="addBtn()">+</button>
+
+        <hr>
+        <!-- 情况二:方法带一个参数 -->
+        <!-- 不显式传参,默认传入event -->
+        <button v-on:click="addBtn2">+</button>
+        <!-- 显式传参,参数默认为undefined -->
+        <button v-on:click="addBtn2()">+</button>
+
+        <hr>
+        <!-- 情况三:方法带两个参数 -->
+        <button v-on:click="addBtn3(1,$event)">+</button>
+    </div>
+
+    <h1>事件修饰符</h1>
+    <hr>
+
+    <div id="root">
+
+        <!-- 停止冒泡 -->
+        <button @click.stop="doStop">doStop</button>
+
+        <!-- 阻止默认行为 -->
+        <button @click.prevent="stopDefault">stopDefaultBtn</button>
+
+        <!-- 阻止表单提交行为 -->
+        <form action="" @submit.prevent>
+            <input type="text" name="name" id="name">
+            <input type="submit" value="提交表单">
+        </form>
+
+        <button @click.enter='doEnter'>doEnter</button>
+        <!-- 点击只回调一次 -->
+        <button @click.once="doOnce">once change</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                addBtn() {
+                    this.count++
+                },
+                addBtn2(param) {
+                    console.log('带一个参数param: ', param)
+                },
+                addBtn3(param, event) {
+                    console.log('带两个参数被点击', param, event)
+                }
+            }
+        })
+
+        const root = new Vue({
+            el: '#root',
+            data: {
+
+            },
+            methods: {
+                doStop(event) {
+                    console.log(event)
+                },
+                stopDefault(event) {
+                    console.log(event)
+                },
+                doEnter(event) {
+                    console.log(event)
+                },
+                doOnce(event) {
+                    console.log(event)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

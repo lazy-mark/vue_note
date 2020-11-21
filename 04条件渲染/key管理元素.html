@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key管理元素</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <template v-if="type === 'username'">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Enter your username" key='username'>
+        </template>
+        <template v-else>
+            <label for="email">Email</label>
+            <input type="email" placeholder="Enter your email address" key='email'>
+        </template>
+        <!-- 点击后,默认两个template的input中的value是重用,添加key就可以分开管理了 -->
+        <button @click='changeLogin'>change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                type: 'username'
+            },
+            methods: {
+                changeLogin() {
+                    this.type = this.type === 'username' ? 'email' : 'username'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

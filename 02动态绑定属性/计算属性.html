@@ -10,24 +10,40 @@
 </head>
 <body>
     <div id="app">
-        {{message}}
-
-        <hr>
-
+        
+        <p>原始值: {{message}}</p>
         <!-- 模板内可进行复杂的操作,但这种方式并不好维护,我们可以换成方法/计算属性 -->
-        {{message.split('').reverse().join('')}}
+        <p>mustache语法: {{message.split('').reverse().join('')}}</p>
 
-        <hr>
         <!-- 通过方法 -->
-        {{reverseMsg()}}
+        <p>通过方法: {{reverseMsg()}}</p>
+        <p>通过方法: {{reverseMsg()}}</p>
 
-        <hr>
-
-        <!-- 通过计算属性 -->
-        {{reversedMessage}}
-
+        <!-- 
+            通过计算属性：
+                在计算属性都包含setter+getter,可执行一些自定义操作.
+                在一个计算属性里也可以完成方法级别的复杂逻辑,最后需要返回一个结果.
+                计算属性可以依赖其它计算属性;
+                计算属性可以依赖当前vue实例的数据,还可以依赖其它实例的数据;
+        -->
+        <p>通过计算属性: {{reversedMessage}}</p>
+        <p>通过计算属性: {{reversedMessage}}</p>
 
     </div>
+
+    <!-- 
+        从视觉上,方法和计算属性有同样的效果.我们多添加了一行,在控制台通过方法调用的,执行了多少次,就打印了多少次;而通过计算属性的只打印了一次.
+        即计算属性是基于它们的依赖进行缓存的,只有相关的依赖发生改变时才会重新求值.这意味着message只要不变,就不必再次执行函数.
+        对于计算大数据量的数组,不必每次都进行计算,可提高性能.
+     -->
+
+    <div id="root">
+        <p>firstName: {{firstName}}</p>
+        <p>lastName: {{lastName}}</p>
+        <p>fullName: {{fullName}}</p>
+        <p>fullName: {{fullName}}</p>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         const vm = new Vue({
@@ -37,12 +53,35 @@
             },
             methods: {
                 reverseMsg: function() {
+                    console.log('reverseMsg method')
                     return this.message.split('').reverse().join('')
                 }
             },
             computed: {
                 reversedMessage: function() {
+                    console.log('reverseMessage computed')
                     return this.message.split('').reverse().join('')
+                }
+            }
+        })
+
+        const root = new Vue({
+            el: '#root',
+            data: {
+                firstName: 'Foo',
+                lastName: 'Bar'
+            },
+            computed: {
+                fullName: {
+                    get: function() {
+                        console.log('fullName get method')
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    set: function(newValue) {
+                        const nums = newValue.split(' ');
+                        this.firstName = nums[0];
+                        this.lastName = nums[nums.length-1];
+                    }
                 }
             }
         })
