@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html指令</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-html会被浏览器解析 -->
+        <div v-html="html"></div>
+        <!-- v-text只会显示,并且会替换原来的内容 -->
+        <div v-text="html">默认值</div>
+
+        <!-- mustache不会替换原来的内容 -->
+        <div>默认值: {{html}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                html: '<div>我的div</div>'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+</html>

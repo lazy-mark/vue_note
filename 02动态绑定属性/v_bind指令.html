@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind</title>
+    <style>
+        .btn {
+            width: 100px;
+            height: 100px;
+        }
+        .btn-default {
+            width: 200px;
+            height: 200px;
+        }
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <a v-bind:href="url">百度</a><br>
+        <!-- v-bind: 单向绑定,当我们尝试修改input的值时,在控制台打印vm.msg会发现并没有跟着改变.这是和v-model中一个区别 -->
+        <input type="text" v-bind:value="msg" /><br>
+
+        <!-- v-bind绑定其它HTML属性 -->
+        <img v-bind:src="img" v-bind:class="clazz"><br>
+
+        <!-- v-bind绑定对象 -->
+        <span v-bind:class="{active: isActive}">我是span</span><br>
+        <!-- 通过方法简化绑定对象 -->
+        <span v-bind:class="getClass()">通过方法显示样式</span><br>
+
+        <!-- 静态绑定数组 -->
+        <i v-bind:class="['icon','icon-product']"></i>
+        <!-- 动态绑定数组 -->
+        <i v-bind:class="icons"></i>
+
+        <!-- 静态绑定样式显得有点多余,在css中即可实现 -->
+        <!-- 动态绑定样式,可换成方法/计算属性 -->
+        <h2 v-bind:style="{fontSize: finalSize, backgroundColor: color}">LOGO</h2>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                url: 'http://www.baidu.com',
+                msg: 'message',
+                img: 'https://cn.vuejs.org/images/logo.png', 
+                clazz: 'btn-default',
+                isActive: true,
+                icons: ['icon','icon-search'],
+                finalSize: '20px',
+                color: 'red',
+            },
+            methods: {
+                getClass: function () {
+                    return {active: this.isActive}
+                }
+            }
+        })
+    </script>
+</body>
+</html>

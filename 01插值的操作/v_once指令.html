@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-once指令</title>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- 案例：点击按钮后,切换成另外一个组件. -->
+        <comp1 v-if="type === 'comp1'"></comp1>
+        <comp2 v-if="type === 'comp2'"></comp2>
+        <button @click="btnClick">change by if</button>
+    </div>
+
+    <!-- 
+        通过 v-if 点击按钮切换时,vue底层会判断comp1组件不用了,取而代之用comp2组件,
+        就会把comp1组件销毁掉,并且创建comp2组件.如果又要显示comp1,同理,comp2组件
+        销毁掉,comp1创建.这样的操作使得每次点击按钮其中一个组件得销毁,另外一个组件
+        创建,会影响性能.v-once就出现了.
+     -->
+
+    <div id="root">
+        <component :is="type"></component>
+        <button @click="btnClick">change by v-once</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        /**
+            加上v-once之后,当组件被渲染时,这个组件就会放到内存中,当切换时,另外一个组件
+            也会放到内存中,再次切换时,就不需要再创建一个组件,而是从内存中拿出以前的组件.
+            性能高,非常适合展示静态内容.
+        */
+        Vue.component('comp1', {
+            template: `<div v-once>我是第一个组件</div>`
+        })
+        Vue.component('comp2', {
+            template: `<div v-once>我是第二个组件</div>`
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                type: 'comp1'
+            },
+            methods: {
+                btnClick: function () {
+                    this.type = this.type === 'comp1' ? 'comp2' : 'comp1'
+                }
+            }
+        })
+
+        const root = new Vue({
+            el: '#root',
+            data: {
+                type: 'comp1'
+            },
+            methods: {
+                btnClick: function () {
+                    this.type = this.type === 'comp1' ? 'comp2' : 'comp1'
+                }
+            }
+        })
+    </script>
+
+    
+
+</body>
+</html>

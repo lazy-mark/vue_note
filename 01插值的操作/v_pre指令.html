@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-pre指令</title>
+</head>
+<body>
+
+    <div id="app">
+        <p v-pre :title='message'>{{message}}</p>
+        <p>{{message}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'v-pre指令跳过元素及子元素的编译过程'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+</body>
+</html>
