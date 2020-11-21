@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="message" />
+        <p>Message is: {{ message }}</p>
+
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <!-- 在文本区域插值不会生效,应使用v-model -->
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world!!!'
+            },
+        })
+    </script>
+</body>
+</html>

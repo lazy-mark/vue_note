@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <select v-model='cities' multiple style="width: 50px" @change='selectCity'>
+                <option v-for="city in cities" :value='city.id'>{{city.name}}</option>
+            </select>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                cities: [
+                    {
+                        id: 0,
+                        name: '浙江'
+                    },
+                    {
+                        id: 1,
+                        name: '深圳'
+                    },
+                    {
+                        id: 2,
+                        name: '北京'
+                    },
+                    {
+                        id: 3,
+                        name: '上海'
+                    },
+                    {
+                        id: 4,
+                        name: '四川'
+                    },
+                    {
+                        id: 5,
+                        name: '天津'
+                    }
+                ],
+            },
+            methods: {
+                selectCity(event) {
+                    console.log(event.target.selectedIndex) // 选择项的index索引
+                    console.log(event.target.value) //选择项的value
+                }
+            }
+        })
+    </script>
+</body>
+</html>

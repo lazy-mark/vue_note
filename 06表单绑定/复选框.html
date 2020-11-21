@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <label for="hobby">爱好</label>
+            <input type="checkbox" name="hobby" value="0" id="hobby" v-model='hobbies'>看书
+            <input type="checkbox" name="hobby" value="1" id="hobby" v-model='hobbies'>爬山
+            <input type="checkbox" name="hobby" value="2" id="hobby" v-model='hobbies'>游泳
+            <input type="checkbox" name="hobby" value="3" id="hobby" v-model='hobbies'>旅游
+            <input type="checkbox" name="hobby" value="4" id="hobby" v-model='hobbies'>美食
+            <input type="checkbox" name="hobby" value="5" id="hobby" v-model='hobbies'>睡觉
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                hobbies: ['0','2','4','5']
+            },
+        })
+    </script>
+</body>
+</html>
