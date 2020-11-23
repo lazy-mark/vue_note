@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局组件</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- 3. 使用组件 -->
+        <cpn-c></cpn-c>
+        <cpn-c></cpn-c>
+        <cpn-cn></cpn-cn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        // 1. 创建组件构造器
+        const cpnC = Vue.extend({
+            template: `<h1>标题</h1>`
+        })
+        // 2. 注册组件
+        Vue.component('cpn-c', cpnC)
+
+        // 新语法糖
+        Vue.component('cpn-cn', {
+            template: `<h2>新语法糖</h2>`
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+            },
+        })
+    </script>
+</body>
+</html>

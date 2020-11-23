@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>props父向子传递数据</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <my-cpn v-bind:mmovies='movies'></my-cpn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <template id='my-cpn'>
+        <div>
+            <h2>{{cmsg}}</h2>
+            <ul>
+                <li v-for='item in mmovies'>{{item}}</li>
+            </ul>
+        </div>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                movies: ['海王', '葫芦娃', '金蝉脱壳']
+            },
+            components: {
+                'my-cpn': {
+                    template: '#my-cpn',
+                    // props: ['mmovies'],
+                    props: {    //对象语法
+                        mmovies: {
+                            type: String,
+                            default: 'xxx',
+                            required: false
+                        }
+                    },
+                    data() {
+                        return {
+                            cmsg: '我是子组件的消息'
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

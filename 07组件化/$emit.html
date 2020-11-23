@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子组件向父组件传递数据</title>
+    <style></style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <cpn v-on:item-click='cpnClick'></cpn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <template id="cpn">
+        <div>
+            <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        const cpn = Vue.extend({
+            template: '#cpn',
+            data() {
+                return {
+                    categories: [
+                        { id: '1', name: '热门推荐' },
+                        { id: '2', name: '手机数码' },
+                        { id: '3', name: '家用电器' },
+                        { id: '4', name: '电脑办公' },
+                    ]
+                }
+            },
+            methods: {
+                btnClick(item) {
+                    console.log('子组件点击了',item)
+                    this.$emit('item-click', item)
+                }
+            }
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hi',
+            },
+            components: {
+                cpn
+            },
+            methods: {
+                cpnClick(item) {
+                    console.log('父组件点击了',item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件</title></title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+
+        // 构造子组件
+        const children = Vue.extend({
+            template: `<h2>标题</h2>`
+        })
+
+        // 构造父组件
+        const parent = Vue.extend({
+            template: `<div><children></children><p>正文</p></div>`,
+            components: {
+                "children": children
+            }
+        })
+
+        // 根组件
+        const vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            components: {
+                "parent": parent
+            }
+        })
+    </script>
+</body>
+</html>
