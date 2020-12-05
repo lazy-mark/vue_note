@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot案例</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- 列表显示 -->
+        <cpn></cpn>
+        <!-- 用-分割 -->
+        <cpn>
+            <!-- 目的是为了获取子组件的langs -->
+            <template slot-scope='aaaa'>
+                <span v-for='item in aaaa.data'>{{item}}-</span>
+            </template>
+        </cpn>
+        <cpn></cpn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <template id="cpn">
+        <div>
+            <!-- 目的是将数据传递给父组件 -->
+            <slot :data='langs'>
+                <ul>
+                    <li v-for='item in langs'>{{item}}</li>
+                </ul>
+            </slot>
+            <hr>
+        </div>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                isShow: true,
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            langs: ['C','C++','Java','Python','Go']
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot别名</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <!-- 替换名为center的插槽 -->
+        <cpn><span slot="center">标题</span></cpn>
+    </div>
+    <template id="cpn">
+        <div>
+            <slot name='left'>Logo</slot>
+            <slot name='center'>MENU</slot>
+            <slot name='right'>LOGOUT</slot>
+        </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world!!!'
+            },
+            components: {
+                cpn: {
+                    template: '#cpn'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

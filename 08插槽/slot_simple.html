@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot</title>
+    <style></style>
+</head>
+<body>
+    <!-- 
+        组件的插槽是为了让我们封装的组件更加具有扩展性.让我们决定组件内部的一些内容到底展示什么
+     -->
+    <div id="app">
+        <cpn><button>按钮</button></cpn>
+        <cpn><i>呵呵呵</i></cpn>
+        <cpn></cpn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <template id="cpn">
+        <div>
+            <h2>我是组件</h2>
+            <p>我是组件,哈哈哈</p>
+            <slot></slot>
+            <!-- 
+                插槽可带默认值.
+                如果在父组件中没传递任何元素,子组件也会显示按钮;
+                如果带了,子组件的默认按钮将会被父组件中的元素替换.
+            -->
+            <slot><button>默认按钮</button></slot>
+            <hr>
+        </div>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world!!!'
+            },
+            components: {
+                cpn: {
+                    template: '#cpn'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
