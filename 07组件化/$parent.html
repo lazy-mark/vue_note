@@ -40,6 +40,7 @@
                             console.log(this.$parent)
                             console.log(this.$parent.name)
                             this.$parent.showMessage()
+                            // 当存在多级组件时,$root可直接获取到根组件,$parent只能获取到上一级的组件,不一定是父组件.
                         }
                     }
                 }
