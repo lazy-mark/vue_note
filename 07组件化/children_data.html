@@ -13,6 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         // 组件是一个单独功能模块的封装,有属于自己的HTML模板，也应该有属于自己的数据data。
+        let obj = {
+            message: '我是子组件外部的共享数据',
+        }
         const vm = new Vue({
             el: '#app',
             data: {
@@ -23,7 +26,8 @@
                     template: `<div>{{message}}</div>`,
                     data() { //本身是一个函数,why?  保证每个组件实例的data独立性，如果是属性，那么每次修改其中一个组件，其它组件也会跟着修改。
                         return {
-                            message: '我是子组件中的数据'
+                            // message: '我是子组件中的数据',
+                            message: obj.message,   // 使用这种形式如果obj.message被修改了,那么组件的数据也会被修改.
                         }
                     }
                 }
