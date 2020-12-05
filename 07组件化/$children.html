@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父组件访问子组件$children</title>
+    <style></style>
+</head>
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn1></cpn1>
+        <button @click="btnClick">按钮</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <template id="cpn">
+        <div>我是子组件</div>
+    </template>
+    <template id="cpn1">
+        <div>我是子组件1</div>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world!!!'
+            },
+            methods: {
+                btnClick() {
+                    // 访问子组件
+                    console.log(this.$children)     //包含很多关于子组件的信息
+                    // 调用子组件中的showMessage方法
+                    this.$children[0].showMessage()
+                    // 遍历子组件中的属性和方法
+                    for (let c of this.$children) {
+                        console.log(c.name)
+                        c.showMessage()
+                    }
+
+                    // 缺点：当子组件过多的时候,无法定位到具体的某个子组件,适合访问所有的子组件.
+                }
+            },
+            components: {
+                cpn: {  // 子组件1
+                    template: '#cpn',
+                    data() {
+                        return {
+                            name: '我是子组件的name'
+                        }
+                    },
+                    methods: {
+                        showMessage() {
+                            console.log('component0 show message')
+                        }
+                    }
+                },
+                cpn1: { // 子组件2
+                    template: '#cpn1',
+                    data() {
+                        return {
+                            name: '我是子组件1的name'
+                        }
+                    },
+                    methods: {
+                        showMessage() {
+                            console.log('component1 show message')
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
