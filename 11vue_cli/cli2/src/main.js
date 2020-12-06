@@ -1,0 +1,15 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+
+Vue.config.productionTip = false
+console.log(App)
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  // components: { App },
+  // template: '<App/>',
+  render: h => h(App) // compiler-only 方式
+})
